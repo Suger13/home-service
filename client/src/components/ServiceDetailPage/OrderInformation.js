@@ -79,8 +79,15 @@ const OrderInformation = (props) => {
   const disabledDateTime = () => ({ disabledHours: () => [...ranged] });
 
   const formatDate = (arr) => {
+    console.log("formatDate");
+    console.log({arr});
+    const year = arr[0]
+    const month = arr[1];
+    const day = arr[2];
+    const date = new Date(year, month, day);
     if (arr) {
-      return (`0${arr[2]}-${arr[1]}-${arr[0]}`)
+      // return (`0${arr[2]}-${arr[1]}-${arr[0]}`)
+      return date;
     }
   }
 
@@ -117,7 +124,8 @@ const OrderInformation = (props) => {
               className="picker"
               format="DD MMMM YYYY"
               // value={"Text"}
-              value={summary?.data?.dateArr ? dayjs(formatDate(summary?.data.dateArr), 'DD-MM-YYYY') : null}
+              // value={summary?.data?.dateArr ? dayjs(formatDate(summary?.data.dateArr), 'DD-MM-YYYY') : null}
+              value={summary?.data?.dateArr ? dayjs(formatDate(summary?.data.dateArr)) : null}
               onChange={(date) => {
                 setSummary(prevState => (
                   {
